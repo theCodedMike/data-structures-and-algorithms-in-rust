@@ -1,3 +1,4 @@
+mod base_converter;
 mod custom_stack;
 mod divide_by_two;
 mod par_checker1;
@@ -5,6 +6,7 @@ mod par_checker2;
 mod par_checker3;
 mod stack;
 
+pub use base_converter::*;
 pub use custom_stack::*;
 pub use divide_by_two::*;
 pub use par_checker1::*;
