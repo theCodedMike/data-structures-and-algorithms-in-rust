@@ -1,4 +1,4 @@
-use data_structures_and_algorithms_in_rust::_4_basic_data_structures::{
+use data_structures_and_algorithms_in_rust::_4_basic_data_structures::stack::{
     base_converter, base_converter_exercise, divide_by_two, divide_by_two_exercise,
 };
 

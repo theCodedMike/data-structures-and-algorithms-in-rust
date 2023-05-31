@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::Stack;
+use crate::_4_basic_data_structures::stack::Stack;
 /// 十进制数字转任意进制
 ///
 /// 为安全起见，base不要大于16

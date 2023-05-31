@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::{par_match, Stack};
+use crate::_4_basic_data_structures::stack::{par_match, Stack};
 
 /// 表达式中的括号匹配
 ///

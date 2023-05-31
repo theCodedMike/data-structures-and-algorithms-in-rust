@@ -1,4 +1,4 @@
-use data_structures_and_algorithms_in_rust::_4_basic_data_structures::{MyStack, Stack};
+use data_structures_and_algorithms_in_rust::_4_basic_data_structures::stack::{MyStack, Stack};
 
 #[test]
 fn stack_test() {

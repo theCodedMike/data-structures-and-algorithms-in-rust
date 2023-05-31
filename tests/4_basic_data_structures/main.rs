@@ -1,3 +1,5 @@
-mod number_base_convert;
-mod par_check;
+mod deque;
+mod linked_list;
+mod queue;
 mod stack;
+mod vec;

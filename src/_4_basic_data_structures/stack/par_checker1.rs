@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::Stack;
+use crate::_4_basic_data_structures::stack::Stack;
 
 /// 圆括号"()"匹配
 pub fn par_checker1(par: &str) -> bool {
