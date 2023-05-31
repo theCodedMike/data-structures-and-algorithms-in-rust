@@ -1,5 +1,6 @@
 use crate::_4_basic_data_structures::Stack;
 
+/// 十进制转二进制
 pub fn divide_by_two(mut dec_num: u32) -> String {
     // 用栈来保存余数rem
     let mut rem_stack = Stack::new();

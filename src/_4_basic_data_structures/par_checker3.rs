@@ -1,5 +1,9 @@
 use crate::_4_basic_data_structures::{par_match, Stack};
 
+/// 表达式中的括号匹配
+///
+/// eg:
+/// (2+3)*(3-1)
 pub fn par_checker3(par: &str) -> bool {
     let mut char_list = Vec::new();
     for c in par.chars() {

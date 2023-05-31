@@ -1,5 +1,6 @@
 use crate::_4_basic_data_structures::{par_match, Stack};
 
+/// 括号"(){}[]"匹配
 pub fn par_checker2(par: &str) -> bool {
     let mut char_list = Vec::new();
     for c in par.chars() {
