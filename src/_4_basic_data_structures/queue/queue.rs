@@ -3,6 +3,7 @@
 /// 这样移除数据的复杂度是 O(1)，加入数据的复杂度为 O(n)
 ///
 /// 为了防止队列无限增长，cap 参数用于控制队列长度
+#[derive(Debug)]
 pub struct Queue<T> {
     cap: usize,   // 容量
     data: Vec<T>, // 数据容器
