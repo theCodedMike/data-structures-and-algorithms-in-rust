@@ -1,6 +1,6 @@
-use crate::_4_basic_data_structures::linked_list::{Link, Node};
+use crate::_4_basic_data_structures::{Link, Node};
 
-/// 链表定义
+/// 单链表(头插法)
 pub struct List<T> {
     size: usize,   // 链表节点个数
     head: Link<T>, // 头节点
@@ -30,8 +30,8 @@ impl<T> List<T> {
         self.size += 1;
     }
 
-    /// take会取出数据并置空
     pub fn pop(&mut self) -> Option<T> {
+        // take会取出数据并置空
         self.head.take().map(|node| {
             self.head = node.next;
             self.size -= 1;

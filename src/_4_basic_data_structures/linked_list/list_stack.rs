@@ -1,6 +1,6 @@
-use crate::_4_basic_data_structures::linked_list::{Link, Node};
+use crate::_4_basic_data_structures::{Link, Node};
 
-/// 链表栈
+/// 链表栈(头插法,单链表)
 #[derive(Debug, Clone)]
 pub struct Stack<T> {
     size: usize,
