@@ -1,5 +1,7 @@
 ## 栈的抽象数据类型
 ### 概念
+![栈](../../../assets/stack.png)
+
 只能在一端插入或删除
 
 先进后出(First In Last Out, FILO)
@@ -33,10 +35,13 @@
 | 13 | s.size()     | [1,2,3]     | 3     |
 
 ### 括号匹配
+![括号匹配](../../../assets/parenthesis_matching.png)
 
 ### 进制转换
+![十进制转二进制](../../../assets/dec_to_bin.png)
 
 ### 中缀表达式转后缀表达式
+![中缀表达式转后缀表达式](../../../assets/infix_to_postfix.png)
 
 ##### 示例
 ```

@@ -12,16 +12,16 @@ fn hot_potato_test() {
 /// -- --show-output可以查看std::io::stdout输出的内容
 #[test]
 fn josephus_problem_test() {
-    let count = 10;
-    let bad_num = 3;
-    let mut queue = Queue::new(count);
+    let total = 6;
+    let cycle = 8;
+    let mut queue = Queue::new(total);
 
-    for i in 1..=count {
+    for i in 1..=total {
         let _ = queue.enqueue(i);
     }
 
     while queue.size() > 1 {
-        for _i in 1..bad_num {
+        for _i in 1..cycle {
             let head = queue.dequeue().unwrap();
             let _ = queue.enqueue(head);
         }
