@@ -13,4 +13,18 @@ path = "src/lib.rs"
 name = "main"
 path = "src/main.rs"
 
+[dev-dependencies]
+criterion = "0.4"  # bench test
+gnuplot = "0.0.37"
+
+[[bench]]
+name = "my_benchmark"
+path = "benches/my_benchmark.rs"
+harness = false
+[[bench]]
+name = "stack"
+path = "benches/stack/stack_benchmark.rs"
+harness = false
+
+
 [dependencies]
