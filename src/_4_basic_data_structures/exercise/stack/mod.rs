@@ -4,19 +4,29 @@
 //!
 //! head表明是头插法，tail表明是尾插法
 //!
+//! raw_pointer表明是裸指针版本
+//!
 mod bench;
 mod stack_double_linked_list_head;
+mod stack_double_linked_list_head_raw_pointer;
 mod stack_double_linked_list_tail;
+mod stack_double_linked_list_tail_raw_pointer;
 mod stack_single_linked_list_head;
+mod stack_single_linked_list_head_raw_pointer;
 mod stack_single_linked_list_tail;
+mod stack_single_linked_list_tail_raw_pointer;
 mod stack_vec_head;
 mod stack_vec_tail;
 
 pub use bench::*;
 pub use stack_double_linked_list_head::*;
+pub use stack_double_linked_list_head_raw_pointer::*;
 pub use stack_double_linked_list_tail::*;
+pub use stack_double_linked_list_tail_raw_pointer::*;
 pub use stack_single_linked_list_head::*;
+pub use stack_single_linked_list_head_raw_pointer::*;
 pub use stack_single_linked_list_tail::*;
+pub use stack_single_linked_list_tail_raw_pointer::*;
 pub use stack_vec_head::*;
 pub use stack_vec_tail::*;
 use std::cell::{Ref, RefMut};
