@@ -1,3 +1,6 @@
+use std::collections::LinkedList;
+
 fn main() {
-    println!("Hello, world!");
+    let mut list = LinkedList::new();
+    list.push_back(1);
 }

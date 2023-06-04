@@ -1,5 +1,5 @@
 use std::cell::RefCell;
-use std::ptr::null_mut;
+use std::ptr::{null_mut, NonNull};
 use std::rc::Rc;
 
 pub mod deque;
@@ -44,6 +44,21 @@ impl<T> RawPtrNode<T> {
 }
 
 ///
+/// 单链表节点 - NonNull版
+///
+struct NNNode<T> {
+    elem: T,
+    next: NNLink<T>,
+}
+type NNLink<T> = Option<NonNull<NNNode<T>>>;
+
+impl<T> NNNode<T> {
+    fn new(elem: T) -> NonNull<Self> {
+        unsafe { NonNull::new_unchecked(Box::into_raw(Box::new(NNNode { elem, next: None }))) }
+    }
+}
+
+///
 /// 双链表节点
 ///
 #[derive(Debug)]
@@ -77,6 +92,29 @@ impl<T> BiDiRawPtrNode<T> {
             elem,
             prev: null_mut(),
             next: null_mut(),
+        }
+    }
+}
+
+///
+/// 双链表节点 - NonNull版
+///
+#[derive(Debug)]
+struct BiDiNNNode<T> {
+    elem: T,
+    prev: BiDiNNLink<T>,
+    next: BiDiNNLink<T>,
+}
+type BiDiNNLink<T> = Option<NonNull<BiDiNNNode<T>>>;
+
+impl<T> BiDiNNNode<T> {
+    fn new(elem: T) -> NonNull<Self> {
+        unsafe {
+            NonNull::new_unchecked(Box::into_raw(Box::new(BiDiNNNode {
+                elem,
+                prev: None,
+                next: None,
+            })))
         }
     }
 }
