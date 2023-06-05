@@ -1,4 +1,4 @@
-use data_structures_and_algorithms_in_rust::_4_basic_data_structures::queue::Queue;
+use data_structures_and_algorithms_in_rust::_4_basic_data_structures::_4_2_queue::Queue;
 
 #[test]
 fn queue_test() {

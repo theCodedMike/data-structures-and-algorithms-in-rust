@@ -1,7 +1,10 @@
-use crate::_4_basic_data_structures::stack::{par_match, Stack};
+use crate::_4_basic_data_structures::_4_1_stack::{par_match, Stack};
 
-/// 括号"(){}[]"匹配
-pub fn par_checker2(par: &str) -> bool {
+/// 表达式中的括号匹配
+///
+/// eg:
+/// (2+3)*(3-1)
+pub fn par_checker3(par: &str) -> bool {
     let mut char_list = Vec::new();
     for c in par.chars() {
         char_list.push(c);
@@ -13,21 +16,21 @@ pub fn par_checker2(par: &str) -> bool {
     while index < char_list.len() && balance {
         let c = char_list[index];
 
-        // 同时判断三种开符号
+        // 开符号入栈
         if c == '(' || c == '[' || c == '{' {
             stack.push(c);
-        } else {
+        }
+        if c == ')' || c == ']' || c == '}' {
             if stack.is_empty() {
                 balance = false;
             } else {
-                // 比较当前括号和栈顶括号是否匹配
                 let top = stack.pop().unwrap();
                 if !par_match(top, c) {
                     balance = false;
                 }
             }
         }
-
+        // 非括号直接跳过
         index += 1;
     }
 

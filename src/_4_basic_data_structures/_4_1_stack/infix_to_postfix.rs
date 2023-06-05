@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::stack::{par_checker3, Stack};
+use crate::_4_basic_data_structures::_4_1_stack::{par_checker3, Stack};
 use std::collections::HashMap;
 
 /// 中缀表达式转后缀表达式

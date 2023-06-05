@@ -1,4 +1,4 @@
-use data_structures_and_algorithms_in_rust::_4_basic_data_structures::vec::LVec;
+use data_structures_and_algorithms_in_rust::_4_basic_data_structures::_4_5_vec::LVec;
 
 #[test]
 fn lvec_test() {

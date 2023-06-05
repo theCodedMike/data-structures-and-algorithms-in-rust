@@ -1,5 +1,6 @@
 pub mod _3_algorithm_analysis;
 pub mod _4_basic_data_structures;
+pub mod _5_recursion;
 
 pub fn fibonacci(n: u64) -> u64 {
     match n {

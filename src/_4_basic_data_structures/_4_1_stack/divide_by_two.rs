@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::stack::Stack;
+use crate::_4_basic_data_structures::_4_1_stack::Stack;
 
 /// 十进制转二进制
 pub fn divide_by_two(mut dec_num: u32) -> String {

@@ -1,4 +1,4 @@
-use data_structures_and_algorithms_in_rust::_4_basic_data_structures::linked_list::Stack;
+use data_structures_and_algorithms_in_rust::_4_basic_data_structures::_4_4_linked_list::Stack;
 
 #[test]
 fn list_stack_test() {

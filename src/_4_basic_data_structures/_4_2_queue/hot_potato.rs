@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::queue::Queue;
+use crate::_4_basic_data_structures::_4_2_queue::Queue;
 
 pub fn hot_potato(names: Vec<&str>, num: usize) -> &str {
     // 初始化队列、名字入队

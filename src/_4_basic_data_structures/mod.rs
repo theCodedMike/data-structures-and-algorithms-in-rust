@@ -2,12 +2,12 @@ use std::cell::RefCell;
 use std::ptr::{null_mut, NonNull};
 use std::rc::Rc;
 
-pub mod deque;
+pub mod _4_1_stack;
+pub mod _4_2_queue;
+pub mod _4_3_deque;
+pub mod _4_4_linked_list;
+pub mod _4_5_vec;
 pub mod exercise;
-pub mod linked_list;
-pub mod queue;
-pub mod stack;
-pub mod vec;
 ///
 /// 单链表节点
 ///

@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::deque::Deque;
+use crate::_4_basic_data_structures::_4_3_deque::Deque;
 /// 回文字符串检测
 pub fn pal_checker(pal: &str) -> bool {
     let mut d = Deque::new(pal.len());

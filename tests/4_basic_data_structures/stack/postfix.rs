@@ -1,4 +1,4 @@
-use data_structures_and_algorithms_in_rust::_4_basic_data_structures::stack::{
+use data_structures_and_algorithms_in_rust::_4_basic_data_structures::_4_1_stack::{
     infix_to_postfix, postfix_eval,
 };
 

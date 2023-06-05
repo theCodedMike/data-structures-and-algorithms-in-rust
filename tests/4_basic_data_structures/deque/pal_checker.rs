@@ -1,4 +1,4 @@
-use data_structures_and_algorithms_in_rust::_4_basic_data_structures::deque::pal_checker;
+use data_structures_and_algorithms_in_rust::_4_basic_data_structures::_4_3_deque::pal_checker;
 
 #[test]
 fn pal_checker_test() {

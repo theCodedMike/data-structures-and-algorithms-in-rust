@@ -1,4 +1,4 @@
-use crate::_4_basic_data_structures::stack::{get_target_char, par_match};
+use crate::_4_basic_data_structures::_4_1_stack::{get_target_char, par_match};
 
 pub struct MyStack<T> {
     top: usize,
