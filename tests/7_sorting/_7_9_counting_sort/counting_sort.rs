@@ -1,5 +1,8 @@
 use data_structures_and_algorithms_in_rust::_7_sorting::_7_9_the_counting_sort::counting_sort::counting_sort;
 
+///
+/// cargo test counting_sort_test
+///
 #[test]
 fn counting_sort_test() {
     let mut nums = [54, 32, 99, 18, 75, 31, 43, 56, 21, 22];
