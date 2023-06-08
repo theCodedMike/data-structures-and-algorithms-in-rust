@@ -40,7 +40,7 @@ pub fn binary_search2(nums: &[i32], num: i32) -> bool {
     return if num > nums[mid] {
         binary_search2(&nums[mid + 1..], num)
     } else if num < nums[mid] {
-        binary_search2(&nums[..mid - 1], num)
+        binary_search2(&nums[..mid], num)
     } else {
         // 基本情况2：项存在
         true

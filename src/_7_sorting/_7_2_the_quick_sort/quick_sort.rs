@@ -1,5 +1,5 @@
 ///
-pub fn quick_sort1(nums: &mut [i32], low: usize, high: usize) {
+pub fn quick_sort(nums: &mut [i32], low: usize, high: usize) {
     if nums.len() <= 1 {
         return;
     }
@@ -8,9 +8,9 @@ pub fn quick_sort1(nums: &mut [i32], low: usize, high: usize) {
         let split = partition(nums, low, high);
         if split > 1 {
             // 防止越界(split <= 1)和语法错误
-            quick_sort1(nums, low, split - 1);
+            quick_sort(nums, low, split - 1);
         }
-        quick_sort1(nums, split + 1, high);
+        quick_sort(nums, split + 1, high);
     }
 }
 ///
