@@ -127,6 +127,7 @@ pub fn postorder<T: Clone + Debug>(bt: Link<T>) {
     }
 }
 
+/// 中序遍历并输出括号
 pub fn get_exp<T: Clone + Debug + Display>(bt: Link<T>) -> String {
     let mut exp = String::new();
     if bt.is_some() {
