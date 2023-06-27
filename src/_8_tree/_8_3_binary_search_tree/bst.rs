@@ -1,4 +1,5 @@
-use std::cmp::Ordering;
+use crate::_4_basic_data_structures::_4_2_queue::Queue;
+use std::cmp::{max, Ordering};
 use std::fmt::Debug;
 
 /// 二叉查找树子节点链接
@@ -64,13 +65,11 @@ where
     /// O(n)
     pub fn preorder(&self) {
         println!("key:{:?}, val:{:?}", &self.key, &self.val);
-        match &self.left {
-            None => {}
-            Some(node) => node.preorder(),
+        if let Some(left) = &self.left {
+            left.preorder();
         }
-        match &self.right {
-            None => {}
-            Some(node) => node.preorder(),
+        if let Some(right) = &self.right {
+            right.preorder();
         }
     }
 
@@ -78,14 +77,12 @@ where
     ///
     /// O(n)
     pub fn inorder(&self) {
-        match &self.left {
-            None => {}
-            Some(node) => node.inorder(),
+        if let Some(left) = &self.left {
+            left.inorder();
         }
         println!("key:{:?}, val:{:?}", &self.key, &self.val);
-        match &self.right {
-            None => {}
-            Some(node) => node.inorder(),
+        if let Some(right) = &self.right {
+            right.inorder();
         }
     }
 
@@ -93,13 +90,11 @@ where
     ///
     /// O(n)
     pub fn postorder(&self) {
-        match &self.left {
-            None => {}
-            Some(node) => node.postorder(),
+        if let Some(left) = &self.left {
+            left.postorder();
         }
-        match &self.right {
-            None => {}
-            Some(node) => node.postorder(),
+        if let Some(right) = &self.right {
+            right.postorder();
         }
         println!("key:{:?}, val:{:?}", &self.key, &self.val);
     }
@@ -218,6 +213,79 @@ where
                     }
                 }
             },
+        }
+    }
+
+    /// 计算叶子节点个数
+    pub fn leaf_len(&self) -> usize {
+        match (&self.left, &self.right) {
+            (None, None) => 1,
+            (Some(left), None) => left.leaf_len(),
+            (None, Some(right)) => right.leaf_len(),
+            (Some(left), Some(right)) => left.leaf_len() + right.leaf_len(),
+        }
+    }
+
+    pub fn none_leaf_len(&self) -> usize {
+        self.len() - self.leaf_len()
+    }
+
+    /// 计算树的深度
+    pub fn depth(&self) -> usize {
+        let mut left_depth = 0;
+        if let Some(left) = &self.left {
+            left_depth += left.depth();
+        }
+        let mut right_depth = 0;
+        if let Some(right) = &self.right {
+            right_depth += right.depth();
+        }
+
+        max(left_depth, right_depth) + 1
+    }
+
+    pub fn contains(&self, key: &T) -> bool {
+        match &self.key {
+            None => false,
+            Some(k) => match key.cmp(k) {
+                Ordering::Less => {
+                    // 在左子树查找
+                    match &self.left {
+                        None => false,
+                        Some(node) => node.contains(key),
+                    }
+                }
+                Ordering::Equal => true,
+                Ordering::Greater => {
+                    // 在右子树查找
+                    match &self.right {
+                        None => false,
+                        Some(node) => node.contains(key),
+                    }
+                }
+            },
+        }
+    }
+
+    /// 层次遍历
+    pub fn level_order(&self) {
+        if self.is_empty() {
+            return;
+        }
+        let mut q = Queue::new(self.len());
+        let _ = q.enqueue(self);
+
+        while !q.is_empty() {
+            if let Some(node) = q.dequeue() {
+                println!("key:{:?}, val:{:?}", node.key, node.val);
+
+                if let Some(ref left) = node.left {
+                    let _ = q.enqueue(left);
+                }
+                if let Some(ref right) = node.right {
+                    let _ = q.enqueue(right);
+                }
+            };
         }
     }
 }

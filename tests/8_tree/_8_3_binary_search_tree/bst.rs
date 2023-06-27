@@ -21,6 +21,9 @@ fn binary_search_tree_test() {
     //  4
     assert_eq!(false, bst.is_empty());
     assert_eq!(8, bst.len());
+    assert_eq!(4, bst.leaf_len());
+    assert_eq!(4, bst.none_leaf_len());
+    assert_eq!(4, bst.depth());
 
     assert_eq!((Some(&11), Some(&'h')), bst.max());
     assert_eq!((Some(&4), Some(&'a')), bst.min());
@@ -61,4 +64,15 @@ fn binary_search_tree_test() {
     // key:Some(11), val:Some('h')
     // key:Some(10), val:Some('g')
     // key:Some(8), val:Some('e')
+
+    println!("level order: ");
+    bst.level_order();
+    // key:Some(8), val:Some('e')
+    // key:Some(6), val:Some('c')
+    // key:Some(10), val:Some('g')
+    // key:Some(5), val:Some('b')
+    // key:Some(7), val:Some('d')
+    // key:Some(9), val:Some('f')
+    // key:Some(11), val:Some('h')
+    // key:Some(4), val:Some('a')
 }
