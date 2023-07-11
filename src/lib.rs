@@ -4,6 +4,7 @@ pub mod _5_recursion;
 pub mod _6_searching;
 pub mod _7_sorting;
 pub mod _8_tree;
+pub mod _9_graph;
 
 pub fn fibonacci(n: u64) -> u64 {
     match n {
