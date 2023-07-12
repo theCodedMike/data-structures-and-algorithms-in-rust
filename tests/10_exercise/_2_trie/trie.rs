@@ -1,5 +1,6 @@
 use data_structures_and_algorithms_in_rust::_10_exercise::_2_trie::trie::Trie;
 
+/// cargo test test_trie
 #[test]
 fn test_trie() {
     let mut trie = Trie::new();
