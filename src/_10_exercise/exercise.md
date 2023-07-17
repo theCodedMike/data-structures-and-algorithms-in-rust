@@ -59,6 +59,21 @@ Trie是一种树数据结构，又称为字典树，前缀树，用于检索某�
 ![](../../assets/compare_of_all_filters.png)
 
 
+## 缓存淘汰算法LRU
+LRU (Least Recently Used, 最近最少使用) 算法用于在存储有限的情况下，根据数据的访问记录来淘汰数据  
+这种算法的原理是 "如果数据最近被访问过，那么将来被访问的几率也更高"，见下图示意:  
+1. 已知存储容量为5，目前已缓存了4个用户
+![](../../assets/diagram_lru_1.png)
+2. 业务方访问用户5，由于用户5未被存储，所以需新增插入
+![](../../assets/diagram_lru_2.png)
+3. 业务方访问用户2，由于用户2已被存储，所以需将用户2重新插入
+![](../../assets/diagram_lru_3.png)
+![](../../assets/diagram_lru_4.png)
+4. 业务方访问用户6，由于用户6未被存储，所以需新增插入
+![](../../assets/diagram_lru_5.png)
+5. 对于第4步，由于存储容量为5，所以需要淘汰1个用户
+![](../../assets/diagram_lru_6.png)
+
 
 ## 总结
 ```text
