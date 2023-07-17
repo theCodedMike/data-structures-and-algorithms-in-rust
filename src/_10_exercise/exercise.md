@@ -75,6 +75,15 @@ LRU (Least Recently Used, 最近最少使用) 算法用于在存储有限的情�
 ![](../../assets/diagram_lru_6.png)
 
 
+## 一致性哈希算法
+![](../../assets/conshash.png)
+
+
+
+
+
+
+
 ## 总结
 ```text
    本章的实践包含许多数据结构，而且都非常有用。我们学习了如何实现字典树，布隆和
