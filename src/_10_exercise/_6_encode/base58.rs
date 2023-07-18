@@ -134,7 +134,7 @@ impl Decoder for str {
         let mut j = 0;
         bin[0] = match bytes_left {
             3 => ((out[0] & 0xff0000) >> 16) as u8,
-            2 => (out[0] & 0xff00) as u8,
+            2 => ((out[0] & 0xff00) >> 8) as u8,
             1 => {
                 j = 1;
                 (out[0] & 0xff) as u8
