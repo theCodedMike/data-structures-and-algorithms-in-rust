@@ -1,4 +1,4 @@
-use super::super::serializer;
+use super::super::utils::serializer;
 use chrono::Utc;
 use serde::Serialize;
 use std::thread;
