@@ -1,5 +1,6 @@
 use super::super::utils::serializer;
 use super::pow::ProofOfWork;
+use super::transaction::Transaction;
 use chrono::Utc;
 use serde::Serialize;
 
@@ -14,12 +15,12 @@ pub struct BlockHeader {
 
 /// 区块
 ///
-/// 用字符串来模拟交易
+/// 基于具体交易
 #[derive(Debug)]
 pub struct Block {
-    pub header: BlockHeader, // 区块头
-    pub tranxs: String,      // 区块体
-    pub hash: String,        // 区块哈希
+    pub header: BlockHeader,      // 区块头
+    pub tranxs: Vec<Transaction>, // 区块体
+    pub hash: String,             // 区块哈希
 }
 
 impl Block {
@@ -28,7 +29,7 @@ impl Block {
     /// txs: 区块体   
     /// pre_hash: 前一个区块的哈希
     /// bits: 比特位
-    pub fn new(txs: String, pre_hash: String, bits: u32) -> Self {
+    pub fn new(txs: Vec<Transaction>, pre_hash: String, bits: u32) -> Self {
         // 准备时间、计算交易哈希值
         let time = Utc::now().timestamp();
         let txs_ser = serializer::serialize(&txs);

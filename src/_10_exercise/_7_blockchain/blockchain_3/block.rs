@@ -5,11 +5,11 @@ use serde::Serialize;
 
 #[derive(Serialize, Debug, PartialEq, Eq)]
 pub struct BlockHeader {
-    pub nonce: u32,
+    pub nonce: u32, // 交易记录值
     pub bits: u32,
-    pub time: i64,
-    pub txs_hash: String,
-    pub pre_hash: String,
+    pub time: i64,        // 区块打包时间
+    pub txs_hash: String, // 当前区块交易哈希
+    pub pre_hash: String, // 前一个区块的哈希
 }
 
 /// 区块
