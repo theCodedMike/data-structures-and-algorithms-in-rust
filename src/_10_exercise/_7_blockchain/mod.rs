@@ -4,5 +4,6 @@ pub mod blockchain_3;
 pub mod blockchain_4;
 pub mod blockchain_5;
 pub mod blockchain_6;
+pub mod blockchain_7;
 pub mod elements;
 pub mod utils;
