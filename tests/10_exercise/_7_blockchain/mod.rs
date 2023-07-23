@@ -5,3 +5,4 @@ mod blockchain_4;
 mod blockchain_5;
 mod blockchain_6;
 mod blockchain_7;
+mod blockchain_8;

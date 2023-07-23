@@ -1,5 +1,5 @@
 use data_structures_and_algorithms_in_rust::_10_exercise::_7_blockchain::blockchain_4::blockchain::BlockChain as BC;
-use data_structures_and_algorithms_in_rust::_10_exercise::_7_blockchain::blockchain_4::transaction::Transaction;
+use data_structures_and_algorithms_in_rust::_10_exercise::_7_blockchain::elements::transaction::Transaction;
 
 #[test]
 fn test_blockchain_4() {
