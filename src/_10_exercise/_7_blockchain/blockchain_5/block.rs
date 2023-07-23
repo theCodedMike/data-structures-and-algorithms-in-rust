@@ -1,6 +1,6 @@
+use super::super::elements::transaction::Transaction;
 use super::super::utils::serializer;
 use super::pow::ProofOfWork;
-use super::transaction::Transaction;
 use chrono::Utc;
 use serde::Serialize;
 

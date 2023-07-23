@@ -32,8 +32,7 @@ impl Block {
     pub fn new(txs: Vec<Transaction>, pre_hash: String, bits: u32) -> Self {
         // 准备时间、计算交易哈希值
         let time = Utc::now().timestamp();
-        let txs_ser = serializer::serialize(&txs);
-        let txs_hash = serializer::hash_str(&txs_ser);
+        let txs_hash = Block::merkle_hash_str(&txs);
         let mut block = Block {
             header: BlockHeader {
                 nonce: 0,
@@ -51,5 +50,45 @@ impl Block {
         pow.run(&mut block);
 
         block
+    }
+
+    /// 计算梅根哈希值
+    fn merkle_hash_str(txs: &Vec<Transaction>) -> String {
+        if txs.is_empty() {
+            return "00000000".to_string();
+        }
+
+        let mut merkle_tree = Vec::new();
+        for tx in txs {
+            merkle_tree.push(tx.hash.clone());
+        }
+
+        let mut j = 0;
+        let mut size = merkle_tree.len();
+        while size > 1 {
+            let mut i = 0;
+            let temp = size as u64;
+            while i < temp {
+                let k = std::cmp::min(i + 1, temp - 1);
+                let idx1 = (j + i) as usize;
+                let idx2 = (j + k) as usize;
+                let hash1 = merkle_tree[idx1].clone();
+                let hash2 = merkle_tree[idx2].clone();
+                let merge = format!("{}-{}", hash1, hash2);
+                let merge_ser = serializer::serialize(&merge);
+                let merge_hash = serializer::hash_str(&merge_ser);
+                merkle_tree.push(merge_hash);
+                i += 2;
+            }
+
+            j += temp;
+            size = (size + 1) >> 1;
+        }
+
+        if merkle_tree.is_empty() {
+            "00000000".to_string()
+        } else {
+            merkle_tree.pop().unwrap()
+        }
     }
 }

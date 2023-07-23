@@ -1,6 +1,6 @@
+use super::super::elements::bcdb::BlockChainDb;
 use super::super::utils::bkey::BKey;
 use super::super::utils::serializer;
-use super::bcdb::BlockChainDb;
 use super::block::Block;
 use bigint::U256;
 use leveldb::database::Database;
