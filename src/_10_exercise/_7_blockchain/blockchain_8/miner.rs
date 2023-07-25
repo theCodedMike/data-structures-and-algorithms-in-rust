@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use super::super::elements::transaction::Transaction;
 use super::block::Block;
 use super::pow::ProofOfWork;
@@ -22,7 +24,7 @@ impl Miner {
     }
 
     pub fn mine_block(&mut self, txs: &mut Vec<Transaction>, pre_hash: String, bits: u32) -> Block {
-        let fee = txs.iter().map(|tx| tx.fee).sum(); // 挖矿手续费
+        let fee = txs.iter().map(|tx| tx.fee).sum::<u64>(); // 挖矿手续费
 
         let from = "0x0000".to_string();
         let to = self.address.clone();

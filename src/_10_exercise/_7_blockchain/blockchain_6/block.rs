@@ -16,7 +16,7 @@ pub struct BlockHeader {
 /// 区块
 ///
 /// 基于具体交易
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct Block {
     pub header: BlockHeader,      // 区块头
     pub tranxs: Vec<Transaction>, // 区块体

@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use super::super::elements::transaction::Transaction;
 use super::block::Block;
 use super::pow::ProofOfWork;

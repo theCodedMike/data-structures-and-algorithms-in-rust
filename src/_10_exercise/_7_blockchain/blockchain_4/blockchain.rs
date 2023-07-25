@@ -1,10 +1,10 @@
 use super::super::elements::bcdb::BlockChainDb;
+use super::super::elements::transaction::Transaction;
 use super::super::utils::bkey::BKey;
 use super::super::utils::serializer;
 use super::block::Block;
-use crate::_10_exercise::_7_blockchain::blockchain_4::transaction::Transaction;
 use bigint::U256;
-use leveldb::database::Database;
+use redis::Connection;
 
 /// 难度值和创世区块哈希值
 ///
@@ -14,21 +14,18 @@ const CURR_BITS: u32 = 0x2100FFFF;
 
 const PRE_HASH: &str = "22caaf24ef0aea3522c13d133912d2b722caaf24ef0aea3522c13d133912d2b7";
 
-const SAVE_DIR: &str = "bc_db";
-
 pub struct BlockChain {
     pub blocks: Vec<Block>,
     curr_bits: u32,
-    blocks_db: Box<Database<BKey>>,
+    blocks_db: Box<Connection>,
 }
 
 impl BlockChain {
     pub fn new() -> Self {
-        let mut db = BlockChainDb::new(SAVE_DIR);
+        let mut db = BlockChainDb::default();
         let genesis = Self::genesis_block();
         BlockChain::write_block(&mut db, &genesis);
         BlockChain::write_tail(&mut db, &genesis);
-        println!("New produced block saved!\n");
 
         BlockChain {
             blocks: vec![genesis],
@@ -55,12 +52,11 @@ impl BlockChain {
         Self::write_block(&mut self.blocks_db, &new_block);
         Self::write_tail(&mut self.blocks_db, &new_block);
 
-        println!("New produced block saved!\n");
         self.blocks.push(new_block);
     }
 
     /// 将区块写入数据库
-    fn write_block(db: &mut Database<BKey>, block: &Block) {
+    fn write_block(db: &mut Connection, block: &Block) {
         // 基于区块链的header生成key
         let header_ser = serializer::serialize(&block.header);
         let mut hash_u = [0_u8; 32];
@@ -74,7 +70,7 @@ impl BlockChain {
     }
 
     /// 将区块哈希值作为尾巴写入
-    fn write_tail(db: &mut Database<BKey>, block: &Block) {
+    fn write_tail(db: &mut Connection, block: &Block) {
         let key = BKey {
             val: U256::from("tail".as_bytes()),
         };

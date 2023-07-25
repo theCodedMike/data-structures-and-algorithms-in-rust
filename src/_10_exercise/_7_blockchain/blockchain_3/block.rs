@@ -15,7 +15,7 @@ pub struct BlockHeader {
 /// 区块
 ///
 /// 用字符串来模拟交易
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct Block {
     pub header: BlockHeader, // 区块头
     pub tranxs: String,      // 区块体

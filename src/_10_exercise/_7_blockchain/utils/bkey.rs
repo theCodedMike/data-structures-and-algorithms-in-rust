@@ -1,10 +1,20 @@
 use bigint::U256;
 use db_key::Key;
+use redis::{RedisWrite, ToRedisArgs};
 
 /// 定义大Key
 #[derive(Debug, PartialEq, Eq)]
 pub struct BKey {
     pub val: U256,
+}
+
+impl ToRedisArgs for BKey {
+    fn write_redis_args<W>(&self, out: &mut W)
+    where
+        W: ?Sized + RedisWrite,
+    {
+        out.write_arg(self.as_ref())
+    }
 }
 
 impl<'a> From<&'a [u8]> for BKey {
@@ -25,4 +35,4 @@ impl AsRef<[u8]> for BKey {
     }
 }
 
-impl Key for BKey {}
+impl Key<'_> for BKey {}

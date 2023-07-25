@@ -5,7 +5,7 @@ use super::super::utils::serializer;
 use super::block::Block;
 use super::pow::ProofOfWork;
 use bigint::U256;
-use leveldb::database::Database;
+use redis::Connection;
 use std::collections::HashMap;
 use std::sync::Mutex;
 
@@ -17,30 +17,27 @@ const CURR_BITS: u32 = 0x2100FFFF;
 
 const PRE_HASH: &str = "22caaf24ef0aea3522c13d133912d2b722caaf24ef0aea3522c13d133912d2b7";
 
-const SAVE_DIR: &str = "bc_db";
-
 pub struct BlockChain {
     pub gnes_hash: String,
     pub curr_hash: String,
     pub curr_bits: u32,
-    blocks_db: Box<Database<BKey>>,
+    blocks_db: Box<Connection>,
     blocks_index: Mutex<HashMap<String, Block>>,
 }
 
 impl BlockChain {
     pub fn new() -> Self {
-        let mut db = BlockChainDb::new(SAVE_DIR);
+        let mut db = BlockChainDb::default();
         let genesis = Self::genesis_block();
         BlockChain::write_block(&mut db, &genesis);
         BlockChain::write_tail(&mut db, &genesis);
-        println!("New produced block saved!\n");
-
-        let gene_block = genesis.clone();
-        let mut block_index = Mutex::new(HashMap::new());
-        Self::update_hashmap(&mut block_index, gene_block);
 
         let gnes_hash = genesis.hash.clone();
         let curr_hash = gnes_hash.clone();
+
+        let mut block_index = Mutex::new(HashMap::new());
+        Self::update_hashmap(&mut block_index, genesis);
+
         BlockChain {
             gnes_hash,
             curr_hash,
@@ -80,14 +77,13 @@ impl BlockChain {
         Self::write_block(&mut self.blocks_db, &block);
         Self::write_tail(&mut self.blocks_db, &block);
 
-        println!("New produced block saved!\n");
         self.curr_hash = block.hash.clone();
         self.curr_bits = block.header.bits;
         Self::update_hashmap(&mut self.blocks_index, block);
     }
 
     /// 将区块写入数据库
-    fn write_block(db: &mut Database<BKey>, block: &Block) {
+    fn write_block(db: &mut Connection, block: &Block) {
         // 基于区块链的header生成key
         let header_ser = serializer::serialize(&block.header);
         let mut hash_u = [0_u8; 32];
@@ -101,7 +97,7 @@ impl BlockChain {
     }
 
     /// 将区块哈希值作为尾巴写入
-    fn write_tail(db: &mut Database<BKey>, block: &Block) {
+    fn write_tail(db: &mut Connection, block: &Block) {
         let key = BKey {
             val: U256::from("tail".as_bytes()),
         };

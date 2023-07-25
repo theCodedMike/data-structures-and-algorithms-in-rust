@@ -1,40 +1,35 @@
-use super::super::utils::bkey::BKey;
-use leveldb::database::Database;
-use leveldb::kv::KV;
-use leveldb::options::{Options, WriteOptions};
-use std::{env, fs};
+use redis::{Commands, Connection, ToRedisArgs};
+
+const EXPIRE_TIME_SECONDS: usize = 60 * 1; // 1 minute
+
+const REDIS_URI: &str = "redis://localhost:6379";
 
 pub struct BlockChainDb;
 
 impl BlockChainDb {
     /// 新建并返回数据库
-    pub fn new(path: &str) -> Database<BKey> {
-        let mut dir = env::current_dir().unwrap();
-        dir.push(path);
+    pub fn new(path: &str) -> Connection {
+        let client = redis::Client::open(path).expect("Failed to open redis");
 
-        let path_buf = dir.clone();
-        fs::create_dir_all(dir).unwrap();
+        client.get_connection().expect("Failed to get connection")
+    }
 
-        let path = path_buf.as_path();
-        let mut opts = Options::new();
-        opts.create_if_missing = true;
-
-        let db = match Database::open(path, opts) {
-            Ok(db) => db,
-            Err(e) => panic!("Failed to open db: {:?}", e),
-        };
-
-        db
+    pub fn default() -> Connection {
+        Self::new(REDIS_URI)
     }
 
     /// 将数据写入数据库
-    pub fn write_db(db: &mut Database<BKey>, key: BKey, val: &[u8]) {
-        let write_opts = WriteOptions::new();
-        match db.put(write_opts, key, val) {
-            Ok(_) => (),
-            Err(e) => {
-                panic!("Failed to write block to database: {:?}", e)
-            }
-        }
+    ///
+    /// impl ToRedisArgs for u8  
+    /// impl ToRedisArgs for bool  
+    /// impl ToRedisArgs for String  
+    /// impl<'a> ToRedisArgs for &'a str  
+    /// impl<T: ToRedisArgs> ToRedisArgs for Vec<T>  
+    /// impl<'a, T: ToRedisArgs> ToRedisArgs for &'a [T]  
+    /// impl<T: ToRedisArgs> ToRedisArgs for Option<T>  
+    /// impl<T: ToRedisArgs> ToRedisArgs for &T  
+    pub fn write_db<K: ToRedisArgs>(db: &mut Connection, key: K, val: &[u8]) {
+        db.set_ex(key, val, EXPIRE_TIME_SECONDS)
+            .expect("Failed to write k-v to Redis")
     }
 }

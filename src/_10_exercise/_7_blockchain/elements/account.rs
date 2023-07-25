@@ -1,7 +1,8 @@
 use super::super::elements::transaction::Transaction;
 use super::super::utils::serializer;
+use serde::Serialize;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize)]
 pub struct Account {
     pub nonce: u64,      // 交易记录值
     pub balance: u64,    // 余额
