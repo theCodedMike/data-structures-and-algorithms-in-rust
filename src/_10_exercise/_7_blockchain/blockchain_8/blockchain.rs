@@ -114,14 +114,14 @@ impl BlockChain {
             match hmap.get(&hash) {
                 None => panic!("Error getting block"),
                 Some(val) => {
-                    blocks.push(val.clone());
+                    blocks.push(val);
                     hash = val.header.pre_hash.clone();
                 }
             }
 
             if hash == self.gnes_hash {
                 if let Some(val) = hmap.get(&hash) {
-                    blocks.push(val.clone());
+                    blocks.push(val);
                 }
                 break;
             }
